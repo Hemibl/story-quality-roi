@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הסטורי שווה כסף | 200Apps</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --card: #13131d;
+    --accent: #00d4aa;
+    --danger: #ff4757;
+    --warning: #ffa502;
+    --text: #e8e8e8;
+    --muted: #7a7a8e;
+    --gold: #f5c842;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* SLIDES */
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,212,170,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* SLIDE 1 - TITLE */
+  .slide-title {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+    text-align: center;
+  }
+
+  .slide-title h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .slide-title h1 .highlight {
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .slide-title .subtitle {
+    font-size: 1.5rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  .slide-title .company {
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* SLIDE 2 - THE PROBLEM */
+  .slide-problem { background: linear-gradient(135deg, #1a0a0a 0%, #0a0a0f 100%); }
+
+  .big-number {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    margin: 20px 0;
+  }
+
+  .big-number.red { color: var(--danger); }
+  .big-number.green { color: var(--accent); }
+  .big-number.gold { color: var(--gold); }
+
+  .stat-label {
+    font-size: 1.4rem;
+    color: var(--muted);
+    text-align: center;
+    max-width: 700px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 900px;
+  }
+
+  /* COST ESCALATION */
+  .escalation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .escalation-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    transition: transform 0.3s;
+  }
+
+  .escalation-card:hover { transform: translateY(-5px); }
+
+  .escalation-card .phase {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+
+  .escalation-card .multiplier {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+
+  .escalation-card .cost {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .escalation-card:nth-child(1) .multiplier { color: var(--accent); }
+  .escalation-card:nth-child(2) .multiplier { color: var(--warning); }
+  .escalation-card:nth-child(3) .multiplier { color: #ff7f50; }
+  .escalation-card:nth-child(4) .multiplier { color: var(--danger); }
+
+  .arrow-between {
+    display: none; /* simplified layout */
+  }
+
+  /* QUALITY SPECTRUM */
+  .spectrum-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .spectrum-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 30px 24px;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spectrum-card.best { border-color: var(--accent); }
+  .spectrum-card.good { border-color: var(--gold); }
+  .spectrum-card.bad { border-color: var(--warning); }
+  .spectrum-card.worst { border-color: var(--danger); }
+
+  .spectrum-card .quality-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .best .quality-badge { background: rgba(0,212,170,0.15); color: var(--accent); }
+  .good .quality-badge { background: rgba(245,200,66,0.15); color: var(--gold); }
+  .bad .quality-badge { background: rgba(255,165,2,0.15); color: var(--warning); }
+  .worst .quality-badge { background: rgba(255,71,87,0.15); color: var(--danger); }
+
+  .spectrum-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .spectrum-card .metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+  }
+
+  .spectrum-card .metric:last-child { border: none; }
+
+  .metric-label { color: var(--muted); }
+  .metric-value { font-weight: 700; }
+
+  .best .metric-value { color: var(--accent); }
+  .good .metric-value { color: var(--gold); }
+  .bad .metric-value { color: var(--warning); }
+  .worst .metric-value { color: var(--danger); }
+
+  .spectrum-card .total-cost {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+
+  .total-cost .amount {
+    font-size: 2.2rem;
+    font-weight: 900;
+    display: block;
+    margin-top: 5px;
+  }
+
+  /* FINANCIAL CALCULATOR */
+  .calc-container {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 50px;
+    max-width: 1000px;
+    width: 100%;
+    border: 1px solid rgba(0,212,170,0.2);
+  }
+
+  .calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .calc-row:last-child { border: none; }
+
+  .calc-row .label {
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+
+  .calc-row .value {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .calc-row.highlight-row {
+    background: rgba(0,212,170,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px -20px;
+  }
+
+  .calc-row.highlight-row .value {
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+
+  .calc-row.danger-row {
+    background: rgba(255,71,87,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px -20px;
+  }
+
+  .calc-row.danger-row .value {
+    font-size: 1.8rem;
+    color: var(--danger);
+  }
+
+  /* COMPARISON TABLE */
+  .comparison-table {
+    width: 100%;
+    max-width: 1100px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 40px;
+  }
+
+  .comparison-table th {
+    background: var(--card);
+    padding: 20px;
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+  }
+
+  .comparison-table td {
+    padding: 18px 20px;
+    font-size: 1.05rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+  }
+
+  .comparison-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .comparison-table .row-label {
+    text-align: right;
+    font-weight: 500;
+  }
+
+  /* QUOTE */
+  .quote-block {
+    max-width: 800px;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .quote-block blockquote {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .quote-block cite {
+    font-size: 1rem;
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    list-style: none;
+    max-width: 700px;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .checklist .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .checklist .icon.check { background: rgba(0,212,170,0.15); color: var(--accent); }
+  .checklist .icon.money { background: rgba(245,200,66,0.15); color: var(--gold); }
+
+  /* BOTTOM LINE */
+  .bottom-line-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 900px;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .bl-card {
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+  }
+
+  .bl-card.loss {
+    background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(255,71,87,0.02));
+    border: 1px solid rgba(255,71,87,0.3);
+  }
+
+  .bl-card.gain {
+    background: linear-gradient(135deg, rgba(0,212,170,0.1), rgba(0,212,170,0.02));
+    border: 1px solid rgba(0,212,170,0.3);
+  }
+
+  .bl-card .bl-title {
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+
+  .bl-card .bl-amount {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+
+  .loss .bl-amount { color: var(--danger); }
+  .gain .bl-amount { color: var(--accent); }
+
+  .bl-card .bl-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .slide-cta {
+    background: linear-gradient(135deg, #0a1a15 0%, #0a0a0f 100%);
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(0,212,170,0.02));
+    border: 1px solid rgba(0,212,170,0.3);
+    border-radius: 24px;
+    padding: 50px;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .cta-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .cta-box p {
+    font-size: 1.2rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* NAV DOTS */
+  .slide-nav {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+  }
+
+  .slide-nav a {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: block;
+    transition: all 0.3s;
+  }
+
+  .slide-nav a:hover,
+  .slide-nav a.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  /* SEPARATOR */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin: 30px auto;
+    border-radius: 2px;
+  }
+
+  /* INTERACTIVE CALCULATOR */
+  .interactive-calc {
+    max-width: 900px;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .slider-group {
+    margin-bottom: 25px;
+  }
+
+  .slider-group label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+
+  .slider-group label span:last-child {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  .result-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .result-box {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .result-box .rb-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .result-box .rb-value {
+    font-size: 1.8rem;
+    font-weight: 900;
+  }
+
+  .result-box.saved .rb-value { color: var(--accent); }
+  .result-box.wasted .rb-value { color: var(--danger); }
+  .result-box.roi .rb-value { color: var(--gold); }
+
+  /* CRITERIA GRID */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* RESPONSIVE - TABLET */
+  @media (max-width: 768px) {
+    .escalation-grid,
+    .spectrum-container { grid-template-columns: repeat(2, 1fr); }
+    .bottom-line-grid { grid-template-columns: 1fr; }
+    .result-boxes { grid-template-columns: 1fr; }
+    .slide { padding: 40px 20px; }
+    .calc-container { padding: 30px 20px; }
+    .slide-nav { display: none; }
+    .section-header { font-size: 1.8rem; margin-bottom: 30px; }
+    .big-number { font-size: 4rem; }
+    .checklist li { font-size: 1rem; }
+  }
+
+  /* RESPONSIVE - MOBILE */
+  @media (max-width: 480px) {
+    .criteria-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .slide { padding: 30px 16px; min-height: 100svh; }
+    .escalation-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .spectrum-container { grid-template-columns: 1fr; gap: 16px; }
+    .section-header { font-size: 1.5rem; margin-bottom: 20px; }
+    .big-number { font-size: 3rem; }
+    .stat-label { font-size: 1.1rem; }
+    .escalation-card { padding: 20px 14px; }
+    .escalation-card .multiplier { font-size: 2.5rem; }
+    .escalation-card .phase { font-size: 0.75rem; letter-spacing: 1px; }
+    .calc-container { padding: 20px 16px; }
+    .calc-row .label { font-size: 0.9rem; }
+    .calc-row .value { font-size: 1.1rem; }
+    .calc-row.highlight-row .value,
+    .calc-row.danger-row .value { font-size: 1.3rem; }
+    .bl-card { padding: 25px 20px; }
+    .bl-card .bl-amount { font-size: 2.2rem; }
+    .checklist li { font-size: 0.95rem; gap: 10px; padding: 12px 0; }
+    .checklist .icon { width: 30px; height: 30px; font-size: 1rem; }
+    .quote-block blockquote { font-size: 1.2rem; }
+    .cta-box { padding: 30px 20px; }
+    .cta-box h2 { font-size: 1.8rem; }
+    .slide-title h1 { font-size: 2.5rem; }
+    .slide-title .subtitle { font-size: 1.1rem; }
+    .spectrum-card { padding: 24px 18px; }
+    .spectrum-card .metric { font-size: 0.85rem; padding: 8px 0; }
+    .total-cost .amount { font-size: 1.8rem; }
+    .slider-group label { font-size: 0.9rem; }
+    .result-box .rb-value { font-size: 1.4rem; }
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Slide number */
+  .slide-number {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 2px;
+  }
+
+  /* Watermark */
+  .watermark {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    font-size: 0.8rem;
+    color: rgba(0,212,170,0.2);
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="slide-nav" id="slideNav"></nav>
+
+<!-- ==================== SLIDE 1: TITLE ==================== -->
+<section class="slide slide-title" id="s1">
+  <div class="company">200APPS | Internal Talk</div>
+  <h1>
+    הסטורי שלך<br>
+    <span class="highlight">שווה כסף</span>
+  </h1>
+  <p class="subtitle">למה איכות הסטורי היא ההשקעה הכי משתלמת שיש</p>
+  <div class="divider"></div>
+  <p style="color: var(--muted); font-size: 0.95rem;">חמי בן לביא - Head of Product Operations</p>
+  <span class="watermark">200APPS</span>
+</section>
+
+<!-- ==================== SLIDE 2: THE SHOCKING NUMBER ==================== -->
+<section class="slide slide-problem" id="s2">
+  <p class="stat-label fade-in">עלות איכות תוכנה ירודה בארה"ב בלבד (CISQ, 2024)</p>
+  <div class="big-number red fade-in">$2.41T</div>
+  <p class="stat-label fade-in">טריליון דולר. בשנה. וזה רק בארה"ב.</p>
+  <div class="divider"></div>
+  <p class="stat-label fade-in" style="margin-top: 20px; font-size: 1.1rem;">
+    <strong style="color: var(--danger);">56%</strong> מכלל הבאגים מתחילים בשלב ה-Requirements<br>
+    <strong style="color: var(--danger);">80%</strong> מכישלונות הפרויקטים נובעים מבעיות בדרישות
+  </p>
+  <span class="slide-number">02 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 3: COST ESCALATION ==================== -->
+<section class="slide" id="s3">
+  <h2 class="section-header fade-in">כמה עולה לתקן באג<br>לפי השלב שבו מגלים אותו?</h2>
+  <div class="escalation-grid fade-in">
+    <!-- Upstream -->
+    <div style="text-align: center;">
+      <div style="background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 12px; display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--accent); letter-spacing: 1px;">UPSTREAM</div>
+      <div class="escalation-card" style="margin: 0;">
+        <div class="phase">דרישות / סטורי</div>
+        <div class="multiplier">x1</div>
+        <div class="cost">$100</div>
+        <p style="color: var(--accent); margin-top: 10px; font-size: 0.85rem;">הכי זול. הכי חכם.</p>
+      </div>
+    </div>
+    <!-- Downstream 1 -->
+    <div style="text-align: center;">
+      <div style="background: rgba(255,165,2,0.1); border: 1px solid rgba(255,165,2,0.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 12px; display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--warning); letter-spacing: 1px;">DOWNSTREAM</div>
+      <div class="escalation-card" style="margin: 0;">
+        <div class="phase">פיתוח</div>
+        <div class="multiplier">x6</div>
+        <div class="cost">$600</div>
+        <p style="color: var(--warning); margin-top: 10px; font-size: 0.85rem;">כבר כואב</p>
+      </div>
+    </div>
+    <!-- Downstream 2 -->
+    <div style="text-align: center;">
+      <div style="background: rgba(255,165,2,0.1); border: 1px solid rgba(255,165,2,0.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 12px; display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--warning); letter-spacing: 1px;">DOWNSTREAM</div>
+      <div class="escalation-card" style="margin: 0;">
+        <div class="phase">QA / בדיקות</div>
+        <div class="multiplier">x15</div>
+        <div class="cost">$1,500</div>
+        <p style="color: #ff7f50; margin-top: 10px; font-size: 0.85rem;">עולה ביוקר</p>
+      </div>
+    </div>
+    <!-- Onstream -->
+    <div style="text-align: center;">
+      <div style="background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 12px; display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--danger); letter-spacing: 1px;">ONSTREAM</div>
+      <div class="escalation-card" style="margin: 0;">
+        <div class="phase">פרודקשן</div>
+        <div class="multiplier">x100</div>
+        <div class="cost">$10,000</div>
+        <p style="color: var(--danger); margin-top: 10px; font-size: 0.85rem;">קטסטרופה</p>
+      </div>
+    </div>
+  </div>
+  <p style="color: var(--muted); margin-top: 30px; font-size: 0.9rem;">מקור: מחקרי תעשייה (CISQ, Capers Jones, SEI) - הכיוון מאושר, המכפילים המדויקים משתנים בין מחקרים</p>
+  <span class="slide-number">03 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 4: THE REWORK TAX ==================== -->
+<section class="slide" id="s4">
+  <h2 class="section-header fade-in">"מס ה-Rework" - המס הכי יקר בפיתוח</h2>
+  <div class="bottom-line-grid fade-in">
+    <div class="bl-card loss">
+      <div class="bl-title">rework בפרויקטים ממוצעים</div>
+      <div class="bl-amount">30-50%</div>
+      <div class="bl-desc">מכלל המאמץ בפרויקט תוכנה מושקע ב-Rework - עבודה חוזרת שנגרמת בעיקר מדרישות לא ברורות</div>
+    </div>
+    <div class="bl-card gain">
+      <div class="bl-title">ROI על השקעה בדרישות</div>
+      <div class="bl-amount">x3.3-7.5</div>
+      <div class="bl-desc">כל דולר שמושקע בשיפור תהליך הדרישות מחזיר $3.30 עד $7.50 בחיסכון (Carnegie Mellon)</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p class="stat-label fade-in" style="margin-top: 20px;">
+    קוד שעבר Rework עולה <strong style="color: var(--danger);">פי 2.5</strong> מקוד שנכתב נכון מההתחלה
+  </p>
+  <span class="slide-number">04 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 5: THE 7 CRITERIA ==================== -->
+<section class="slide" id="s5">
+  <h2 class="section-header fade-in">7 הקריטריונים של סטורי מושלם</h2>
+  <p class="stat-label fade-in" style="margin-bottom: 30px;">לפי מתודולוגיית Upstream שקבענו ב-200Apps</p>
+
+  <div class="criteria-grid fade-in">
+    <!-- Criteria 1 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">1</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">User Story</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">As a... I want... So that...</div>
+    </div>
+    <!-- Criteria 2 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">2</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">Description</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">הקשר, רקע, הסבר</div>
+    </div>
+    <!-- Criteria 3 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">3</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">Business Objectives</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">למה? מה הערך העסקי?</div>
+    </div>
+    <!-- Criteria 4 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">4</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">Acceptance Criteria</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">מתי זה "Done"?</div>
+    </div>
+    <!-- Criteria 5 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">5</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">Edge Cases</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">מה יכול להשתבש?</div>
+    </div>
+    <!-- Criteria 6 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">6</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">Design (Figma)</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">לינק לדיזיין מוכן</div>
+    </div>
+    <!-- Criteria 7 -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.15); color: var(--accent); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">7</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent);">Dependencies</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">מה תלוי במה?</div>
+    </div>
+    <!-- Criteria 8 - Out of Scope -->
+    <div style="background: var(--card); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px dashed rgba(0,212,170,0.25);">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,170,0.08); color: var(--muted); font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">8</div>
+      <div style="font-size: 1.05rem; font-weight: 700; color: var(--muted);">Out of Scope</div>
+      <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">מה <strong>לא</strong> נכלל</div>
+      <div style="font-size: 0.7rem; color: var(--muted); margin-top: 6px; opacity: 0.6;">מומלץ</div>
+    </div>
+  </div>
+  <span class="slide-number">05 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 6: QUALITY SPECTRUM ==================== -->
+<section class="slide" id="s5b">
+  <h2 class="section-header fade-in">ארבע רמות איכות: כמה עולה כל גישה?</h2>
+  <p class="stat-label fade-in" style="margin-bottom: 20px;">סטורי ממוצע = 3 ימי פיתוח. עלות יום עבודה כ-$500. בסיס: $1,500 לסטורי.</p>
+
+  <div class="spectrum-container fade-in">
+    <!-- 100% -->
+    <div class="spectrum-card best">
+      <span class="quality-badge">100% - לפי Upstream</span>
+      <h3>סטורי מושלם</h3>
+      <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);">7/7 קריטריונים מלאים</p>
+      <div class="metric"><span class="metric-label">User Story</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Description</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Business Objectives</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Acceptance Criteria</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Edge Cases</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Design (Figma)</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Dependencies</span><span class="metric-value">V</span></div>
+      <div style="margin-top: 15px; padding-top: 12px; border-top: 2px solid rgba(0,212,170,0.2);">
+        <div class="metric"><span class="metric-label" style="font-weight:600;">Rework צפוי</span><span class="metric-value">כ-5%</span></div>
+        <div class="metric"><span class="metric-label" style="font-weight:600;">באגים בפרודקשן</span><span class="metric-value">נדיר</span></div>
+      </div>
+      <div class="total-cost">
+        <small>עלות כוללת לסטורי</small>
+        <span class="amount" style="color: var(--accent);">$2,205</span>
+      </div>
+    </div>
+
+    <!-- 75% -->
+    <div class="spectrum-card good">
+      <span class="quality-badge">75% - כמעט שם</span>
+      <h3>סטורי טוב</h3>
+      <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);">5/7 קריטריונים</p>
+      <div class="metric"><span class="metric-label">User Story</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Description</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Business Objectives</span><span class="metric-value">חלקי</span></div>
+      <div class="metric"><span class="metric-label">Acceptance Criteria</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Edge Cases</span><span class="metric-value">חלק</span></div>
+      <div class="metric"><span class="metric-label">Design (Figma)</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Dependencies</span><span class="metric-value">חלקי</span></div>
+      <div style="margin-top: 15px; padding-top: 12px; border-top: 2px solid rgba(245,200,66,0.2);">
+        <div class="metric"><span class="metric-label" style="font-weight:600;">Rework צפוי</span><span class="metric-value">כ-20%</span></div>
+        <div class="metric"><span class="metric-label" style="font-weight:600;">באגים בפרודקשן</span><span class="metric-value">לפעמים</span></div>
+      </div>
+      <div class="total-cost">
+        <small>עלות כוללת לסטורי</small>
+        <span class="amount" style="color: var(--gold);">$2,940</span>
+      </div>
+    </div>
+
+    <!-- 50% -->
+    <div class="spectrum-card bad">
+      <span class="quality-badge">50% - חצי עבודה</span>
+      <h3>סטורי בינוני</h3>
+      <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);">3/7 קריטריונים</p>
+      <div class="metric"><span class="metric-label">User Story</span><span class="metric-value">V</span></div>
+      <div class="metric"><span class="metric-label">Description</span><span class="metric-value">חלקי</span></div>
+      <div class="metric"><span class="metric-label">Business Objectives</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Acceptance Criteria</span><span class="metric-value">מינימלי</span></div>
+      <div class="metric"><span class="metric-label">Edge Cases</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Design (Figma)</span><span class="metric-value">מעורפל</span></div>
+      <div class="metric"><span class="metric-label">Dependencies</span><span class="metric-value">X</span></div>
+      <div style="margin-top: 15px; padding-top: 12px; border-top: 2px solid rgba(255,165,2,0.2);">
+        <div class="metric"><span class="metric-label" style="font-weight:600;">Rework צפוי</span><span class="metric-value">כ-40%</span></div>
+        <div class="metric"><span class="metric-label" style="font-weight:600;">באגים בפרודקשן</span><span class="metric-value">שכיח</span></div>
+      </div>
+      <div class="total-cost">
+        <small>עלות כוללת לסטורי</small>
+        <span class="amount" style="color: var(--warning);">$3,990</span>
+      </div>
+    </div>
+
+    <!-- 25% -->
+    <div class="spectrum-card worst">
+      <span class="quality-badge">25% - רבע עבודה</span>
+      <h3>סטורי רעוע</h3>
+      <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);">1/7 קריטריונים (אם בכלל)</p>
+      <div class="metric"><span class="metric-label">User Story</span><span class="metric-value">בקושי</span></div>
+      <div class="metric"><span class="metric-label">Description</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Business Objectives</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Acceptance Criteria</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Edge Cases</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Design (Figma)</span><span class="metric-value">X</span></div>
+      <div class="metric"><span class="metric-label">Dependencies</span><span class="metric-value">X</span></div>
+      <div style="margin-top: 15px; padding-top: 12px; border-top: 2px solid rgba(255,71,87,0.2);">
+        <div class="metric"><span class="metric-label" style="font-weight:600;">Rework צפוי</span><span class="metric-value">כ-60%+</span></div>
+        <div class="metric"><span class="metric-label" style="font-weight:600;">באגים בפרודקשן</span><span class="metric-value">ודאי</span></div>
+      </div>
+      <div class="total-cost">
+        <small>עלות כוללת לסטורי</small>
+        <span class="amount" style="color: var(--danger);">$6,090</span>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">06 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 6: SPRINT MATH ==================== -->
+<section class="slide" id="s6">
+  <h2 class="section-header fade-in">בואו נעשה חשבון לספרינט</h2>
+  <div class="calc-container fade-in">
+    <h3 style="color: var(--muted); margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">הנחות בסיס - פרויקט Tier 1</h3>
+    <div class="calc-row">
+      <span class="label">צוות ממוצע (Tier 1)</span>
+      <span class="value">5 מפתחים</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">סטוריז בספרינט (2 שבועות)</span>
+      <span class="value">4 סטוריז</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">עלות בסיס לסטורי (פיתוח בלבד: 3 ימים x $500)</span>
+      <span class="value">$1,500</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">+ QA, PM, מאפיינת, מעצבת (כ-40% מזמן הפיתוח)</span>
+      <span class="value">$600</span>
+    </div>
+    <div class="calc-row" style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 14px 0;">
+      <span class="label" style="font-weight: 600; color: var(--text);">עלות אמיתית לסטורי (כל הצוות)</span>
+      <span class="value" style="color: var(--accent);">$2,100</span>
+    </div>
+
+    <div class="divider" style="margin: 25px auto;"></div>
+
+    <h3 style="color: var(--muted); margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">עלות ספרינט לפי איכות סטורי</h3>
+    <div class="calc-row highlight-row">
+      <span class="label">100% Upstream - סטורי מושלם</span>
+      <span class="value" style="color: var(--accent);">$8,820</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">75% - כמעט שם</span>
+      <span class="value" style="color: var(--gold);">$11,760</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">50% - חצי עבודה</span>
+      <span class="value" style="color: var(--warning);">$15,960</span>
+    </div>
+    <div class="calc-row danger-row">
+      <span class="label">25% - רבע עבודה</span>
+      <span class="value" style="color: var(--danger);">$24,360</span>
+    </div>
+
+    <div class="divider" style="margin: 25px auto;"></div>
+
+    <div class="calc-row" style="border: none;">
+      <span class="label" style="font-size: 1.3rem; color: var(--text); font-weight: 700;">ההפרש בספרינט אחד בלבד</span>
+      <span class="value" style="font-size: 2rem; color: var(--danger);">$15,540</span>
+    </div>
+    <p style="text-align: center; color: var(--muted); font-size: 0.9rem;">* ההפרש בין 100% ל-25% כולל Rework + באגים בפרודקשן + production incidents</p>
+  </div>
+  <span class="slide-number">07 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 8: ANNUAL IMPACT ==================== -->
+<section class="slide" id="s7">
+  <h2 class="section-header fade-in">וכשמכפילים לשנה שלמה?</h2>
+  <p class="stat-label fade-in">26 ספרינטים x צוות Tier 1 אחד</p>
+
+  <div class="bottom-line-grid fade-in" style="margin-top: 40px;">
+    <div class="bl-card loss">
+      <div class="bl-title">עלות שנתית - 25% Quality</div>
+      <div class="bl-amount">$633,360</div>
+      <div class="bl-desc">צוות Tier 1 שעובד עם סטוריז רעועים - 60% מהזמן הולך לrework, באגים, ו"מה התכוונת?"</div>
+    </div>
+    <div class="bl-card gain">
+      <div class="bl-title">עלות שנתית - 100% Quality</div>
+      <div class="bl-amount">$229,320</div>
+      <div class="bl-desc">צוות Tier 1 שעובד עם סטוריז לפי Upstream - בונה נכון מההתחלה, פחות הפתעות</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 40px; text-align: center;" class="fade-in">
+    <p style="font-size: 1rem; color: var(--muted);">חיסכון שנתי פוטנציאלי לצוות Tier 1 אחד</p>
+    <div class="big-number green" style="font-size: 5rem;">$404,040</div>
+    <p style="font-size: 1.2rem; color: var(--accent);">יותר מ-400 אלף דולר. לצוות אחד. לשנה.</p>
+    <p style="font-size: 1rem; color: var(--muted); margin-top: 10px;">כפול מספר הצוותים = ההפרש האמיתי לחברה</p>
+  </div>
+  <span class="slide-number">08 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 9: HIDDEN COSTS ==================== -->
+<section class="slide" id="s8">
+  <h2 class="section-header fade-in">העלויות שלא נכנסות ל-Excel</h2>
+  <ul class="checklist fade-in">
+    <li>
+      <span class="icon money">$</span>
+      <span><strong>Context Switching</strong> - מפתח שנעצר באמצע לשאול "מה התכוונת?" מאבד 23 דקות חזרה לפוקוס (University of California)</span>
+    </li>
+    <li>
+      <span class="icon money">$</span>
+      <span><strong>שחיקת מפתחים</strong> - Rework חוזר הוא סיבה #1 לתסכול ועזיבה. עלות החלפת מפתח: 50-200% מהמשכורת השנתית</span>
+    </li>
+    <li>
+      <span class="icon money">$</span>
+      <span><strong>אמון הלקוח</strong> - כל באג בפרודקשן = שיחת support, escalation, ופגיעה באמון. כמה שווה לקוח שעוזב?</span>
+    </li>
+    <li>
+      <span class="icon money">$</span>
+      <span><strong>Velocity נמוך</strong> - צוות שעסוק ב-Rework לא מספיק לבנות פיצ'רים חדשים. המתחרים רצים - אנחנו מתקנים</span>
+    </li>
+    <li>
+      <span class="icon money">$</span>
+      <span><strong>Technical Debt</strong> - קוד שנכתב על בסיס הבנה חלקית = חוב טכני שצובר ריבית בכל ספרינט</span>
+    </li>
+  </ul>
+  <span class="slide-number">09 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 10: INTERACTIVE CALCULATOR ==================== -->
+<section class="slide" id="s9">
+  <h2 class="section-header fade-in">מחשבון: כמה אתם חוסכים?</h2>
+  <p class="stat-label fade-in" style="margin-bottom: 30px;">הזיזו את הסליידרים לפי המציאות שלכם</p>
+
+  <div class="calc-container fade-in">
+    <div class="interactive-calc">
+      <div class="slider-group">
+        <label>
+          <span>מספר מפתחים בצוות</span>
+          <span id="devCountLabel">5</span>
+        </label>
+        <input type="range" id="devCount" min="2" max="15" value="5" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <label>
+          <span>סטוריז בספרינט</span>
+          <span id="storyCountLabel">4</span>
+        </label>
+        <input type="range" id="storyCount" min="2" max="15" value="4" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <label>
+          <span>עלות יום מפתח ($)</span>
+          <span id="dayCostLabel">$500</span>
+        </label>
+        <input type="range" id="dayCost" min="200" max="800" step="50" value="500" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <label>
+          <span>רמת איכות סטורי נוכחית (%)</span>
+          <span id="qualityLabel">50%</span>
+        </label>
+        <input type="range" id="qualityLevel" min="25" max="100" step="25" value="50" oninput="updateCalc()">
+      </div>
+    </div>
+
+    <div class="result-boxes">
+      <div class="result-box wasted">
+        <div class="rb-label">עלות Rework שנתית</div>
+        <div class="rb-value" id="reworkCost">$0</div>
+      </div>
+      <div class="result-box saved">
+        <div class="rb-label">חיסכון שנתי אם 100%</div>
+        <div class="rb-value" id="savingsAmount">$0</div>
+      </div>
+      <div class="result-box roi">
+        <div class="rb-label">ROI על השקעה בדרישות</div>
+        <div class="rb-value" id="roiAmount">x0</div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">10 / 12</span>
+</section>
+
+<!-- ==================== SLIDE 11: CTA ==================== -->
+<section class="slide slide-cta" id="s10">
+  <div class="quote-block fade-in">
+    <blockquote>"ההבדל בין צוות שמצליח לצוות שנתקע הוא לא הכישרון של המפתחים - זו איכות הסטורי שהם מקבלים"</blockquote>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cta-box fade-in" style="margin-top: 30px;">
+    <h2>אז מה עושים מחר בבוקר?</h2>
+    <ul class="checklist" style="text-align: right; margin-top: 20px;">
+      <li>
+        <span class="icon check">&#10003;</span>
+        <span><strong>מנהלי מוצר</strong> עוברים על הספרינט הנוכחי ומשלימים את הקריטריונים החסרים</span>
+      </li>
+      <li>
+        <span class="icon check">&#10003;</span>
+        <span><strong>7/7 חובה לכל סטורי:</strong> User Story, Description, Business Objectives, AC, Edge Cases, Design, Dependencies</span>
+      </li>
+      <li>
+        <span class="icon check">&#10003;</span>
+        <span><strong>Story Review</strong> - מפתח + PM ביחד לפני שמתחילים - 15 דקות שחוסכות שעות</span>
+      </li>
+    </ul>
+    <div class="divider" style="margin-top: 30px;"></div>
+    <p style="margin-top: 25px; font-size: 1.4rem; color: var(--accent); font-weight: 900; line-height: 1.4;">
+      כל שקל שנשקיע בסטורי טוב - יחזיר לנו עד פי 7.5
+    </p>
+  </div>
+  <span class="slide-number">11 / 12</span>
+  <span class="watermark">200APPS</span>
+</section>
+
+<!-- ==================== SLIDE 12: THANK YOU ==================== -->
+<section class="slide" id="s11" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); text-align: center;">
+  <h1 style="font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; margin-bottom: 30px;" class="fade-in">
+    <span style="background: linear-gradient(90deg, var(--accent), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">תודה</span>
+  </h1>
+  <div class="divider"></div>
+  <p style="font-size: 1.3rem; color: var(--muted); margin-top: 20px; max-width: 500px;" class="fade-in">בואו נבנה סטוריז שחוסכים לנו זמן, כסף, ותסכול</p>
+  <p style="font-size: 1rem; color: var(--accent); margin-top: 30px;" class="fade-in">חמי בן לביא - Head of Product Operations</p>
+  <p style="font-size: 0.9rem; color: var(--muted); margin-top: 5px;" class="fade-in">200Apps</p>
+  <span class="slide-number">12 / 12</span>
+  <span class="watermark">200APPS</span>
+</section>
+
+<script>
+// Fade-in animation on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Navigation dots
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('slideNav');
+slides.forEach((slide, i) => {
+  const dot = document.createElement('a');
+  dot.href = '#' + slide.id;
+  dot.title = 'Slide ' + (i + 1);
+  nav.appendChild(dot);
+});
+
+// Active dot on scroll
+const navDots = nav.querySelectorAll('a');
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(slides).indexOf(entry.target);
+      navDots.forEach(d => d.classList.remove('active'));
+      navDots[idx]?.classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(s => slideObserver.observe(s));
+
+// Interactive calculator
+function updateCalc() {
+  const devs = parseInt(document.getElementById('devCount').value);
+  const stories = parseInt(document.getElementById('storyCount').value);
+  const dayCost = parseInt(document.getElementById('dayCost').value);
+  const quality = parseInt(document.getElementById('qualityLevel').value);
+
+  document.getElementById('devCountLabel').textContent = devs;
+  document.getElementById('storyCountLabel').textContent = stories;
+  document.getElementById('dayCostLabel').textContent = '$' + dayCost;
+  document.getElementById('qualityLabel').textContent = quality + '%';
+
+  const devCostPerStory = dayCost * 3;
+  const baseCostPerStory = devCostPerStory * 1.4; // +40% QA, PM, designer, analyst
+  const sprints = 26;
+
+  // Rework percentages by quality
+  const reworkMap = { 25: 0.60, 50: 0.40, 75: 0.20, 100: 0.05 };
+  const reworkPct = reworkMap[quality] || 0.40;
+  const perfectRework = 0.05;
+
+  const currentReworkCost = baseCostPerStory * reworkPct * stories * sprints;
+  const perfectReworkCost = baseCostPerStory * perfectRework * stories * sprints;
+  const savings = currentReworkCost - perfectReworkCost;
+
+  // Also add production bug costs
+  const bugMultiplier = { 25: 0.15, 50: 0.08, 75: 0.03, 100: 0.005 };
+  const bugCost = baseCostPerStory * 10 * (bugMultiplier[quality] || 0.08) * stories * sprints;
+  const perfectBugCost = baseCostPerStory * 10 * 0.005 * stories * sprints;
+  const bugSavings = bugCost - perfectBugCost;
+
+  const totalRework = currentReworkCost + bugCost;
+  const totalSavings = savings + bugSavings;
+
+  document.getElementById('reworkCost').textContent = '$' + Math.round(totalRework).toLocaleString();
+  document.getElementById('savingsAmount').textContent = '$' + Math.round(totalSavings).toLocaleString();
+
+  const roi = totalSavings > 0 ? (totalSavings / (baseCostPerStory * 0.1 * stories * sprints)).toFixed(1) : 0;
+  document.getElementById('roiAmount').textContent = 'x' + roi;
+}
+
+// Initial calc
+updateCalc();
+
+// Keyboard navigation
+let currentSlide = 0;
+const allSlides = document.querySelectorAll('.slide');
+
+function goToSlide(index) {
+  if (index < 0) index = 0;
+  if (index >= allSlides.length) index = allSlides.length - 1;
+  currentSlide = index;
+  allSlides[index].scrollIntoView({ behavior: 'smooth' });
+}
+
+// Track current slide on scroll
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      currentSlide = Array.from(allSlides).indexOf(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+allSlides.forEach(s => scrollObserver.observe(s));
+
+document.addEventListener('keydown', (e) => {
+  // Don't navigate if user is interacting with inputs
+  if (e.target.tagName === 'INPUT') return;
+
+  switch(e.key) {
+    case 'ArrowDown':
+    case 'ArrowLeft':
+    case 'PageDown':
+    case ' ':
+      e.preventDefault();
+      goToSlide(currentSlide + 1);
+      break;
+    case 'ArrowUp':
+    case 'ArrowRight':
+    case 'PageUp':
+      e.preventDefault();
+      goToSlide(currentSlide - 1);
+      break;
+    case 'Home':
+      e.preventDefault();
+      goToSlide(0);
+      break;
+    case 'End':
+      e.preventDefault();
+      goToSlide(allSlides.length - 1);
+      break;
+  }
+});
+</script>
+
+</body>
+</html>
