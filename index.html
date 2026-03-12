@@ -1172,20 +1172,21 @@ function updateCalc() {
   const devCostPerStory = dayCost * 3;
   const baseCostPerStory = devCostPerStory * 1.4; // +40% QA, PM, designer, analyst
   const sprints = 26;
+  const teamScale = devs / 5; // scale costs relative to base team of 5
 
   // Rework percentages by quality
   const reworkMap = { 25: 0.60, 50: 0.40, 75: 0.20, 100: 0.05 };
   const reworkPct = reworkMap[quality] || 0.40;
   const perfectRework = 0.05;
 
-  const currentReworkCost = baseCostPerStory * reworkPct * stories * sprints;
-  const perfectReworkCost = baseCostPerStory * perfectRework * stories * sprints;
+  const currentReworkCost = baseCostPerStory * reworkPct * stories * sprints * teamScale;
+  const perfectReworkCost = baseCostPerStory * perfectRework * stories * sprints * teamScale;
   const savings = currentReworkCost - perfectReworkCost;
 
   // Also add production bug costs
   const bugMultiplier = { 25: 0.15, 50: 0.08, 75: 0.03, 100: 0.005 };
-  const bugCost = baseCostPerStory * 10 * (bugMultiplier[quality] || 0.08) * stories * sprints;
-  const perfectBugCost = baseCostPerStory * 10 * 0.005 * stories * sprints;
+  const bugCost = baseCostPerStory * 10 * (bugMultiplier[quality] || 0.08) * stories * sprints * teamScale;
+  const perfectBugCost = baseCostPerStory * 10 * 0.005 * stories * sprints * teamScale;
   const bugSavings = bugCost - perfectBugCost;
 
   const totalRework = currentReworkCost + bugCost;
@@ -1194,7 +1195,7 @@ function updateCalc() {
   document.getElementById('reworkCost').textContent = '$' + Math.round(totalRework).toLocaleString();
   document.getElementById('savingsAmount').textContent = '$' + Math.round(totalSavings).toLocaleString();
 
-  const roi = totalSavings > 0 ? (totalSavings / (baseCostPerStory * 0.1 * stories * sprints)).toFixed(1) : 0;
+  const roi = totalSavings > 0 ? (totalSavings / (baseCostPerStory * 0.1 * stories * sprints * teamScale)).toFixed(1) : 0;
   document.getElementById('roiAmount').textContent = 'x' + roi;
 }
 
