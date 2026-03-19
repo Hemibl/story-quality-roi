@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>השוואה: מחקר עומק מול מצגת ROI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: #0f0f1a;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #00d4aa;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #7a7a8e;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+  }
+
+  h2 {
+    color: #f5c842;
+    font-size: 1.3rem;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(245,200,66,0.2);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: #1a1a2e;
+    color: #00d4aa;
+    padding: 14px 16px;
+    text-align: right;
+    font-weight: 700;
+    border-bottom: 2px solid #00d4aa33;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ffffff0d;
+    vertical-align: top;
+  }
+
+  tr:hover {
+    background: #ffffff05;
+  }
+
+  .status-fix {
+    background: #ff475720;
+    color: #ff6b7a;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .status-ok {
+    background: #00d4aa20;
+    color: #00d4aa;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .status-adjust {
+    background: #ffa50220;
+    color: #ffa502;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .action-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .action-list li {
+    background: #13131d;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    border-right: 4px solid;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .action-list li.critical { border-color: #ff4757; }
+  .action-list li.moderate { border-color: #ffa502; }
+  .action-list li.minor { border-color: #00d4aa; }
+
+  .priority {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .priority.high { background: #ff475730; color: #ff6b7a; }
+  .priority.med { background: #ffa50230; color: #ffa502; }
+  .priority.low { background: #00d4aa30; color: #00d4aa; }
+
+  .summary-box {
+    background: linear-gradient(135deg, #1a1a2e, #13131d);
+    border: 1px solid #00d4aa33;
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .summary-box .big-num {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #ffa502;
+  }
+
+  .note {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 15px 0;
+    font-size: 0.85rem;
+    color: #7a7a8e;
+    border-right: 3px solid #7a7a8e;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>השוואה: מחקר עומק מול מצגת ROI</h1>
+<p class="subtitle">ניתוח פערים בין ממצאי המחקר לבין מה שמוצג במצגת "הסטורי שווה כסף" של 200Apps</p>
+
+<h2>טבלת השוואה מפורטת</h2>
+
+<table>
+<thead>
+<tr>
+  <th>נושא</th>
+  <th>במצגת</th>
+  <th>במחקר</th>
+  <th>סטטוס</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>אחוז Rework</strong></td>
+  <td>40%-60% בסטוריז גרועים (סלייד 6, רמה 50% ו-25%)</td>
+  <td>Raytheon מצא כ-40%, Boehm דיווח על עד כ-50%. טווח 60% לא תועד בבירור. <strong>טווח ייצוגי: 40%-50%</strong></td>
+  <td><span class="status-adjust">לעדכן</span></td>
+</tr>
+<tr>
+  <td><strong>עלות תיקון באג</strong></td>
+  <td>"יחס של 1:10 עד 1:100" (לא מוצג ישירות אבל בבסיס החישובים)</td>
+  <td>המחקר מדבר על 1:5-10 (דרישות מול קידוד), 1:20 (פרודקשן), ועד 1:200 בתחזוקה. <strong>הטענה 1:100 מופרזת במעט</strong> - עדיף "עשרות מונים"</td>
+  <td><span class="status-adjust">לעדכן</span></td>
+</tr>
+<tr>
+  <td><strong>Context Switching - 23 דקות</strong></td>
+  <td>"מפתח שנעצר באמצע לשאול מאבד 23 דקות" (סלייד 9, University of California)</td>
+  <td>23 דקות = מחקר כללי על עובדי ידע (Gloria Mark, UCI, 2008). <strong>למפתחים ספציפית: 10-15 דקות לחזור לקוד</strong>, 30-45 דקות לשחזר הקשר מלא (Duke/Vanderbilt, 2015)</td>
+  <td><span class="status-fix">לתקן</span></td>
+</tr>
+<tr>
+  <td><strong>עלות החלפת מפתח</strong></td>
+  <td>"50-200% מהמשכורת השנתית" (סלייד 9)</td>
+  <td>הטווח מאושש ע"י Gallup/SHRM. למפתחים בכירים: כ-100%-150%. <strong>200% בקצה העליון</strong>. צריך להציג כ"הערכה תעשייתית" ולא כעובדה</td>
+  <td><span class="status-ok">תקין (+ הערה)</span></td>
+</tr>
+<tr>
+  <td><strong>שיעור הצלחת פרויקטים</strong></td>
+  <td>לא מופיע ישירות במצגת</td>
+  <td>רק 31% מהפרויקטים הושלמו בהצלחה (Standish CHAOS). דרישות לקויות = גורם מרכזי</td>
+  <td><span class="status-adjust">להוסיף</span></td>
+</tr>
+<tr>
+  <td><strong>מקור שגיאות מדרישות</strong></td>
+  <td>לא מופיע ישירות</td>
+  <td>41% מהשגיאות מגיעות מדרישות (Sheldon), 56% מהבאגים (DeMarco). Standish: חוסר שיתוף משתמשים 12.8%, דרישות לא שלמות 12.3%</td>
+  <td><span class="status-adjust">להוסיף</span></td>
+</tr>
+<tr>
+  <td><strong>ROI על דרישות</strong></td>
+  <td>"כל שקל שנשקיע בסטורי טוב יחזיר לנו עד פי 7.5" (סלייד 11)</td>
+  <td>Leffingwell: ROI של 153%-913% (פי 1.5 עד פי 9.1). <strong>הטענה "פי 7.5" נמצאת בטווח</strong>, אבל צריך להציג כטווח ולא כמספר מוחלט</td>
+  <td><span class="status-ok">תקין (+ הערה)</span></td>
+</tr>
+<tr>
+  <td><strong>Burnout ושחיקה</strong></td>
+  <td>"Rework חוזר הוא סיבה #1 לתסכול ועזיבה" (סלייד 9)</td>
+  <td>המחקר מאשר שעומס יתר ותנאי קשים מעלים סיכון לשחיקה ועזיבה. 15%-20% מתקציב השכר הולך על עזיבות משחיקה. <strong>אבל "סיבה #1" לא מגובה - זה גורם מרכזי, לא בהכרח הראשון</strong></td>
+  <td><span class="status-adjust">לעדכן</span></td>
+</tr>
+<tr>
+  <td><strong>עלות באג בפרודקשן</strong></td>
+  <td>מוזכר ב-bugMultiplier במחשבון (baseCostPerStory * 10)</td>
+  <td>1 שעת השבתה בממוצע עולה כ-$300K (Aspire Systems). עלויות כוללות: downtime, fix, QA, עונשים</td>
+  <td><span class="status-ok">תקין</span></td>
+</tr>
+<tr>
+  <td><strong>מתודולוגיות</strong></td>
+  <td>מתמקדת ב-Upstream (7 קריטריונים)</td>
+  <td>BDD, ATDD, Story Mapping מוזכרים כשיטות יעילות מקבילות. <strong>כדאי להציג Upstream בהקשר הרחב יותר</strong></td>
+  <td><span class="status-adjust">להרחיב</span></td>
+</tr>
+</tbody>
+</table>
+
+<h2>רשימת שינויים נדרשים (לפי עדיפות)</h2>
+
+<ul class="action-list">
+  <li class="critical">
+    <span class="priority high">קריטי</span>
+    <div>
+      <strong>סלייד 9 - Context Switching:</strong> לשנות מ-"23 דקות" ל-"10-15 דקות לחזור לקוד, עד 45 דקות לשחזר הקשר מלא". להחליף את המקור מ-"University of California" ל-"מחקר Duke/Vanderbilt 2015 על מהנדסי תוכנה". המספר 23 דקות הוא לעובדי ידע כלליים, לא למפתחים.
+    </div>
+  </li>
+  <li class="critical">
+    <span class="priority high">קריטי</span>
+    <div>
+      <strong>סלייד 6 - אחוזי Rework:</strong> בקטגוריה של 25% Quality, להוריד מ-"60%+" ל-"50%+" (או "עד 50%"). 60% rework לא מתועד בבירור במחקר. Raytheon=40%, Boehm=50%.
+    </div>
+  </li>
+  <li class="moderate">
+    <span class="priority med">בינוני</span>
+    <div>
+      <strong>סלייד 9 - שחיקת מפתחים:</strong> לשנות מ-"סיבה #1 לתסכול ועזיבה" ל-"גורם מרכזי לתסכול ועזיבה". להוסיף: "15%-20% מתקציב השכר הולך על עזיבות הקשורות בשחיקה".
+    </div>
+  </li>
+  <li class="moderate">
+    <span class="priority med">בינוני</span>
+    <div>
+      <strong>סלייד 11 - ROI:</strong> לשנות מ-"עד פי 7.5" ל-"פי 2 עד 9" (על בסיס Leffingwell ROI 153%-913%). להציג כטווח ולא כמספר יחיד.
+    </div>
+  </li>
+  <li class="moderate">
+    <span class="priority med">בינוני</span>
+    <div>
+      <strong>הוספת נתוני Standish CHAOS:</strong> לסלייד 3 (הבעיה) או סלייד חדש - "רק 31% מהפרויקטים הושלמו בהצלחה. דרישות לקויות = הגורם המרכזי לכישלון". זה נתון חזק שמחזק את כל הטיעון.
+    </div>
+  </li>
+  <li class="moderate">
+    <span class="priority med">בינוני</span>
+    <div>
+      <strong>הוספת נתוני מקור שגיאות:</strong> "56% מהבאגים מגיעים מדרישות לקויות (DeMarco)" - מחזק את הארגומנט. מתאים לסלייד 3 או 4.
+    </div>
+  </li>
+  <li class="minor">
+    <span class="priority low">קל</span>
+    <div>
+      <strong>סלייד 9 - עלות החלפת מפתח:</strong> להוסיף "על פי הערכות תעשייתיות" לפני "50-200% מהמשכורת". לא להציג כעובדה מדעית אלא כאומדן מקובל.
+    </div>
+  </li>
+  <li class="minor">
+    <span class="priority low">קל</span>
+    <div>
+      <strong>עדכון המחשבון (סלייד 10):</strong> להתאים את reworkMap - לשנות את רמת 25% מ-0.60 ל-0.50 בהתאם למחקר.
+    </div>
+  </li>
+  <li class="minor">
+    <span class="priority low">קל</span>
+    <div>
+      <strong>הוספת מקורות:</strong> להוסיף סלייד מקורות קטן בסוף, או footnotes עם שמות המחקרים: Leffingwell 1997, Gloria Mark 2008, Ko et al 2015, Standish CHAOS 1994, Gallup/SHRM.
+    </div>
+  </li>
+</ul>
+
+<h2>מה שמגובה היטב (לא לשנות)</h2>
+
+<div class="note">
+  <strong>הנתונים הבאים מגובים מחקרית ואפשר להשאיר כמות שהם:</strong><br>
+  - עלות בסיס לסטורי ($1,500 = 3 ימים x $500) - הנחה סבירה<br>
+  - Overhead של 40% (QA, PM, מאפיינת, מעצבת) - הערכה תעשייתית מקובלת<br>
+  - 7 קריטריונים של Upstream - מבוסס על מתודולוגיה מוכרת<br>
+  - עלות באג בפרודקשן כמכפיל משמעותי - מאושש (Aspire: $300K לשעת השבתה)<br>
+  - הקשר בין איכות דרישות לאיכות תוצר - מאושש במחקרים רבים
+</div>
+
+<div class="summary-box">
+  <div style="font-size: 1.2rem; color: #7a7a8e; margin-bottom: 10px;">סה"כ שינויים נדרשים</div>
+  <div class="big-num">9</div>
+  <div style="margin-top: 15px; display: flex; justify-content: center; gap: 30px;">
+    <span><span class="priority high">קריטי</span> 2</span>
+    <span><span class="priority med">בינוני</span> 4</span>
+    <span><span class="priority low">קל</span> 3</span>
+  </div>
+  <div style="margin-top: 25px; color: #00d4aa; font-size: 1.1rem; font-weight: 700;">
+    המסר המרכזי של המצגת תקף ומגובה - הנתונים דורשים כיול, לא שינוי כיוון
+  </div>
+</div>
+
+</div>
+</body>
+</html>

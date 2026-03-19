@@ -675,12 +675,15 @@
   <p class="stat-label fade-in">טריליון דולר. בשנה. וזה רק בארה"ב.</p>
   <div class="divider"></div>
   <p class="stat-label fade-in" style="margin-top: 20px; font-size: 1.1rem;">
-    <strong style="color: var(--danger);">56%</strong> מכלל הבאגים מתחילים בשלב ה-Requirements (DeMarco)<br>
-    רק <strong style="color: var(--danger);">31%</strong> מהפרויקטים הושלמו בהצלחה בזמן ובתקציב (Standish CHAOS)<br>
-    <span style="font-size: 0.9rem;">דרישות לקויות = הגורם המרכזי לכישלון פרויקטים</span>
+    <strong style="color: var(--danger);">56%</strong> מכלל הבאגים מתחילים בשלב הדרישות - Requirements (DeMarco)<br>
+    רק <strong style="color: var(--danger);">31%</strong> מהפרויקטים הושלמו בהצלחה בזמן ובתקציב (Standish CHAOS)
   </p>
-  <span class="slide-number">02 / 12</span>
+  <p class="fade-in" style="margin-top: 30px; font-size: 1.6rem; color: #ffffff; text-align: center;">
+    דרישות לקויות = הגורם המרכזי לכישלון פרויקטים
+  </p>
+  <span class="slide-number">02 / 16</span>
 </section>
+
 
 <!-- ==================== SLIDE 3: COST ESCALATION ==================== -->
 <section class="slide" id="s3">
@@ -728,7 +731,7 @@
     </div>
   </div>
   <p style="color: var(--muted); margin-top: 30px; font-size: 0.9rem;">מקור: מחקרי תעשייה (CISQ, Capers Jones, SEI) - הכיוון מאושר, המכפילים המדויקים משתנים בין מחקרים</p>
-  <span class="slide-number">03 / 12</span>
+  <span class="slide-number">04 / 16</span>
 </section>
 
 <!-- ==================== SLIDE 4: THE REWORK TAX ==================== -->
@@ -750,10 +753,87 @@
   <p class="stat-label fade-in" style="margin-top: 20px;">
     קוד שעבר Rework עולה <strong style="color: var(--danger);">פי 2.5</strong> מקוד שנכתב נכון מההתחלה
   </p>
-  <span class="slide-number">04 / 12</span>
+  <span class="slide-number">05 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 5: THE 7 CRITERIA ==================== -->
+<!-- ==================== SLIDE 5: TWO SIDES OF THE COIN ==================== -->
+<section class="slide" id="s4b" style="background: linear-gradient(135deg, #1a0a1a 0%, #0a0a0f 100%);">
+  <h2 class="section-header fade-in">שני צדדים של אותו מטבע</h2>
+  <p class="stat-label fade-in" style="margin-bottom: 30px;">הבעיה אף פעם לא חד-צדדית</p>
+
+  <div class="bottom-line-grid fade-in" style="max-width: 1000px;">
+    <div class="bl-card" style="background: linear-gradient(135deg, rgba(0,150,255,0.1), rgba(0,150,255,0.02)); border: 1px solid rgba(0,150,255,0.3); text-align: right;">
+      <div class="bl-title" style="text-align: center;">הצד של ה-PM</div>
+      <ul style="list-style: none; padding: 0; margin-top: 15px;">
+        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 1.05rem; color: var(--text);">"השקעתי שעתיים בסטורי מושלם - ואף אחד לא קרא"</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 1.05rem; color: var(--text);">"שוב בנו לי לא מה שביקשתי"</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 1.05rem; color: var(--text);">"המפתח לא קרא את ה-AC"</li>
+        <li style="padding: 12px 0; font-size: 1.05rem; color: var(--text);">"אני כותב סטוריז מפורטים ובסוף שואלים אותי הכל מחדש"</li>
+      </ul>
+    </div>
+    <div class="bl-card" style="background: linear-gradient(135deg, rgba(245,200,66,0.1), rgba(245,200,66,0.02)); border: 1px solid rgba(245,200,66,0.3); text-align: right;">
+      <div class="bl-title" style="text-align: center;">הצד של המפתח</div>
+      <ul style="list-style: none; padding: 0; margin-top: 15px;">
+        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 1.05rem; color: var(--text);">"קיבלתי שורה אחת, ניחשתי, ובניתי 3 ימים הפוך"</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 1.05rem; color: var(--text);">"שוב שינו לי requirements באמצע"</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 1.05rem; color: var(--text);">"ה-AC ארוך מדי, לא ברור, ואני לא יודע מה באמת חשוב"</li>
+        <li style="padding: 12px 0; font-size: 1.05rem; color: var(--text);">"אני חי עם הקוד הרע שנבנה על הבנה חלקית"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top: 40px;"></div>
+  <p class="stat-label fade-in" style="margin-top: 20px; font-size: 1.3rem; color: var(--accent); font-weight: 700;">
+    סטורי טוב הוא הבסיס. שיחה טובה מוודאת שהבסיס הזה עובד.
+  </p>
+  <span class="slide-number">06 / 16</span>
+</section>
+
+<!-- ==================== SLIDE 5b: DEVELOPER PAIN ==================== -->
+<section class="slide" id="s4c" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a0a 100%);">
+  <h2 class="section-header fade-in">מפתחים: מה אתם מפסידים מסטורי רעוע?</h2>
+
+  <ul class="checklist fade-in" style="max-width: 800px;">
+    <li>
+      <span class="icon" style="background: rgba(255,71,87,0.15); color: var(--danger);">!</span>
+      <span><strong>הזמן שלכם נשרף</strong> - Rework זה לא באג של ה-PM. זה <strong>אתם</strong> שכותבים קוד מחדש, אתם שמבזבזים ימים על משהו שלא היה צריך לקרות</span>
+    </li>
+    <li>
+      <span class="icon" style="background: rgba(255,71,87,0.15); color: var(--danger);">!</span>
+      <span><strong>Flow נהרס</strong> - סטורי לא ברור = שאלות באמצע. כל שאלה של "מה התכוונת?" זה 10-45 דקות של context switching. אתם עוצרים, מחכים, ומנסים לחזור - והקוד בראש כבר לא שם</span>
+    </li>
+    <li>
+      <span class="icon" style="background: rgba(255,71,87,0.15); color: var(--danger);">!</span>
+      <span><strong>Technical Debt שאתם חיים איתו</strong> - קוד שנכתב על בסיס הבנה חלקית הופך לחוב טכני. ומי מתחזק את הקוד הזה אחר כך? אתם</span>
+    </li>
+    <li>
+      <span class="icon" style="background: rgba(255,71,87,0.15); color: var(--danger);">!</span>
+      <span><strong>תסכול מצטבר</strong> - "בניתי את זה 3 ימים ועכשיו אומרים לי שזה לא מה שרצו" - זה מה ששוחק. לא הקוד, אלא ההרגשה שהעבודה הייתה מיותרת</span>
+    </li>
+  </ul>
+
+  <div class="divider" style="margin-top: 30px;"></div>
+  <p class="stat-label fade-in" style="margin-top: 20px; font-size: 1.2rem;">
+    <strong style="color: var(--gold);">סטורי מפורט הוא לא טובה ל-PM - הוא ההגנה שלכם</strong><br>
+    <span style="font-size: 1rem;">AC ברור, Edge Cases מוגדרים, Design מקושר - זה מה שמונע "אה, שכחתי להגיד לך"</span>
+  </p>
+  <span class="slide-number">07 / 16</span>
+</section>
+
+<!-- ==================== SLIDE 5c: DISCUSSION BEFORE CRITERIA ==================== -->
+<section class="slide" id="s4d" style="background: linear-gradient(135deg, #0a0a1a 0%, #0a0a0f 100%);">
+  <div class="quote-block fade-in">
+    <div style="font-size: 1.1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px;">עצירה לדיון</div>
+    <blockquote style="font-size: clamp(1.8rem, 4vw, 2.8rem);">אם הייתם יכולים לשפר דבר אחד בסטורי שאתם מקבלים (או כותבים) - מה זה היה?</blockquote>
+    <p style="color: var(--muted); margin-top: 30px; font-size: 1.4rem; line-height: 1.8;">
+      חשבו על הספרינט האחרון. מה היה הדבר שהכי הפריע?<br>
+      מה גרם לכם לעצור באמצע ולשאול שאלות?
+    </p>
+  </div>
+  <span class="slide-number">08 / 16</span>
+</section>
+
+<!-- ==================== SLIDE 6: THE 7 CRITERIA ==================== -->
 <section class="slide" id="s5">
   <h2 class="section-header fade-in">7 הקריטריונים של סטורי מושלם</h2>
   <p class="stat-label fade-in" style="margin-bottom: 30px;">לפי מתודולוגיית Upstream שקבענו ב-200Apps</p>
@@ -809,10 +889,10 @@
       <div style="font-size: 0.7rem; color: var(--muted); margin-top: 6px; opacity: 0.6;">מומלץ</div>
     </div>
   </div>
-  <span class="slide-number">05 / 12</span>
+  <span class="slide-number">09 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 6: QUALITY SPECTRUM ==================== -->
+<!-- ==================== SLIDE 10: QUALITY SPECTRUM ==================== -->
 <section class="slide" id="s5b">
   <h2 class="section-header fade-in">ארבע רמות איכות: כמה עולה כל גישה?</h2>
   <p class="stat-label fade-in" style="margin-bottom: 20px;">סטורי ממוצע = 3 ימי פיתוח. עלות יום עבודה כ-$500. בסיס: $1,500 לסטורי.</p>
@@ -906,10 +986,10 @@
       </div>
     </div>
   </div>
-  <span class="slide-number">06 / 12</span>
+  <span class="slide-number">10 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 6: SPRINT MATH ==================== -->
+<!-- ==================== SLIDE 11: SPRINT MATH ==================== -->
 <section class="slide" id="s6">
   <h2 class="section-header fade-in">בואו נעשה חשבון לספרינט</h2>
   <div class="calc-container fade-in">
@@ -963,10 +1043,10 @@
     </div>
     <p style="text-align: center; color: var(--muted); font-size: 0.9rem;">* ההפרש בין 100% ל-25% כולל Rework + באגים בפרודקשן + production incidents</p>
   </div>
-  <span class="slide-number">07 / 12</span>
+  <span class="slide-number">11 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 8: ANNUAL IMPACT ==================== -->
+<!-- ==================== SLIDE 12: ANNUAL IMPACT ==================== -->
 <section class="slide" id="s7">
   <h2 class="section-header fade-in">וכשמכפילים לשנה שלמה?</h2>
   <p class="stat-label fade-in">26 ספרינטים x צוות Tier 1 אחד</p>
@@ -990,10 +1070,10 @@
     <p style="font-size: 1.2rem; color: var(--accent);">יותר מ-300 אלף דולר. לצוות אחד. לשנה.</p>
     <p style="font-size: 1rem; color: var(--muted); margin-top: 10px;">כפול מספר הצוותים = ההפרש האמיתי לחברה</p>
   </div>
-  <span class="slide-number">08 / 12</span>
+  <span class="slide-number">12 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 9: HIDDEN COSTS ==================== -->
+<!-- ==================== SLIDE 13: HIDDEN COSTS ==================== -->
 <section class="slide" id="s8">
   <h2 class="section-header fade-in">העלויות שלא נכנסות ל-Excel</h2>
   <ul class="checklist fade-in">
@@ -1018,10 +1098,10 @@
       <span><strong>Technical Debt</strong> - קוד שנכתב על בסיס הבנה חלקית = חוב טכני שצובר ריבית בכל ספרינט</span>
     </li>
   </ul>
-  <span class="slide-number">09 / 12</span>
+  <span class="slide-number">13 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 10: INTERACTIVE CALCULATOR ==================== -->
+<!-- ==================== SLIDE 14: INTERACTIVE CALCULATOR ==================== -->
 <section class="slide" id="s9">
   <h2 class="section-header fade-in">מחשבון: כמה אתם חוסכים?</h2>
   <p class="stat-label fade-in" style="margin-bottom: 30px;">הזיזו את הסליידרים לפי המציאות שלכם</p>
@@ -1073,39 +1153,88 @@
       </div>
     </div>
   </div>
-  <span class="slide-number">10 / 12</span>
+  <span class="slide-number">14 / 16</span>
 </section>
 
-<!-- ==================== SLIDE 11: CTA ==================== -->
+<!-- ==================== SLIDE 15: STORY WALKTHROUGH ==================== -->
+<section class="slide" id="s9b" style="background: linear-gradient(135deg, #0a1a10 0%, #0a0a0f 100%);">
+  <h2 class="section-header fade-in">סטורי טוב + Story Walkthrough</h2>
+  <p class="stat-label fade-in" style="margin-bottom: 30px;">כתיבה מפורטת היא הבסיס. שיחה קצרה מוודאת שהבסיס עובד.</p>
+
+  <div class="calc-container fade-in" style="max-width: 800px; border-color: rgba(0,212,170,0.3);">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <p style="color: var(--gold); font-size: 1rem; margin-bottom: 15px;">שלב 1: PM כותב סטורי מלא (7/7 קריטריונים) &nbsp;|&nbsp; שלב 2:</p>
+      <span style="font-size: 3rem; font-weight: 900; color: var(--accent);">15 דקות Walkthrough</span><br>
+      <span style="color: var(--muted); font-size: 1.1rem;">PM + מפתח עוברים על הסטורי הכתוב ביחד, לפני שמתחילים קוד</span>
+    </div>
+
+    <div class="calc-row">
+      <span class="label" style="font-weight: 600; color: var(--text);">PM מסביר את ה-Why</span>
+      <span class="value" style="font-size: 1rem; color: var(--accent);">3 דקות</span>
+    </div>
+    <div class="calc-row">
+      <span class="label" style="font-weight: 600; color: var(--text);">עוברים על AC ו-Edge Cases ביחד</span>
+      <span class="value" style="font-size: 1rem; color: var(--accent);">5 דקות</span>
+    </div>
+    <div class="calc-row">
+      <span class="label" style="font-weight: 600; color: var(--text);">המפתח שואל את השאלות שלו עכשיו (לא באמצע)</span>
+      <span class="value" style="font-size: 1rem; color: var(--accent);">5 דקות</span>
+    </div>
+    <div class="calc-row">
+      <span class="label" style="font-weight: 600; color: var(--text);">מסכמים: מה בסקופ, מה לא</span>
+      <span class="value" style="font-size: 1rem; color: var(--accent);">2 דקות</span>
+    </div>
+
+    <div class="divider" style="margin: 25px auto;"></div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+      <div style="text-align: center; padding: 20px; background: rgba(255,71,87,0.05); border-radius: 12px;">
+        <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">סטורי חלקי, בלי שיחה</div>
+        <div style="font-size: 1.4rem; font-weight: 900; color: var(--danger);">3-5 שעות rework</div>
+        <div style="font-size: 0.85rem; color: var(--muted); margin-top: 5px;">שאלות פזורות, ניחושים, context switching</div>
+      </div>
+      <div style="text-align: center; padding: 20px; background: rgba(0,212,170,0.05); border-radius: 12px;">
+        <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">סטורי מלא + Walkthrough</div>
+        <div style="font-size: 1.4rem; font-weight: 900; color: var(--accent);">15 דקות סנכרון</div>
+        <div style="font-size: 0.85rem; color: var(--muted); margin-top: 5px;">הסטורי ברור, השאלות נענו, בונים נכון</div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-number">15 / 16</span>
+</section>
+
+<!-- ==================== SLIDE 16: CTA ==================== -->
 <section class="slide slide-cta" id="s10">
   <div class="quote-block fade-in">
-    <blockquote>"ההבדל בין צוות שמצליח לצוות שנתקע הוא לא הכישרון של המפתחים - זו איכות הסטורי שהם מקבלים"</blockquote>
+    <blockquote>"ההבדל בין צוות שמצליח לצוות שנתקע הוא לא הכישרון של המפתחים - זו איכות הסטורי והתקשורת סביבו"</blockquote>
   </div>
 
   <div class="divider"></div>
 
   <div class="cta-box fade-in" style="margin-top: 30px;">
-    <h2>אז מה עושים מחר בבוקר?</h2>
+    <div style="font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px;">דיון פתוח</div>
+    <h2>מה אתם מוכנים להתחייב?</h2>
+    <p style="color: var(--muted); font-size: 1.1rem; margin-top: 15px; margin-bottom: 25px;">לא "מה צריך לעשות" - אלא מה כל אחד מכם לוקח על עצמו</p>
     <ul class="checklist" style="text-align: right; margin-top: 20px;">
       <li>
         <span class="icon check">&#10003;</span>
-        <span><strong>מנהלי מוצר</strong> עוברים על הספרינט הנוכחי ומשלימים את הקריטריונים החסרים</span>
+        <span><strong>PM:</strong> כל סטורי יוצא עם 7/7 קריטריונים מלאים - User Story, Description, Business Objectives, AC, Edge Cases, Design, Dependencies</span>
       </li>
       <li>
         <span class="icon check">&#10003;</span>
-        <span><strong>7/7 חובה לכל סטורי:</strong> User Story, Description, Business Objectives, AC, Edge Cases, Design, Dependencies</span>
+        <span><strong>מפתחים:</strong> לקרוא את הסטורי לפני שמתחילים. אם משהו לא ברור - לא לנחש, לדרוש הבהרה</span>
       </li>
       <li>
         <span class="icon check">&#10003;</span>
-        <span><strong>Story Review</strong> - מפתח + PM ביחד לפני שמתחילים - 15 דקות שחוסכות שעות</span>
+        <span><strong>ביחד:</strong> Story Walkthrough של 15 דקות לפני תחילת פיתוח - PM מסביר, מפתח שואל, שניהם מסכימים</span>
       </li>
     </ul>
     <div class="divider" style="margin-top: 30px;"></div>
     <p style="margin-top: 25px; font-size: 1.4rem; color: var(--accent); font-weight: 900; line-height: 1.4;">
-      כל שקל שנשקיע בסטורי טוב - יחזיר לנו פי 2 עד 9
+      סטורי מלא + שיחה קצרה = חיסכון של שעות rework
     </p>
   </div>
-  <span class="slide-number">11 / 13</span>
+  <span class="slide-number">16 / 16</span>
   <span class="watermark">200APPS</span>
 </section>
 
@@ -1123,19 +1252,19 @@
     <div class="calc-row"><span class="label">עלות באג בפרודקשן</span><span class="value" style="color: var(--muted);">Aspire Systems, 2025</span></div>
   </div>
   <p style="color: var(--muted); font-size: 0.8rem; margin-top: 20px; text-align: center;" class="fade-in">הנתונים מוצגים כטווחים מייצגים. המספרים המדויקים משתנים בין מחקרים וארגונים.</p>
-  <span class="slide-number">12 / 13</span>
+  <span class="slide-number">16b / 16</span>
 </section>
 
-<!-- ==================== SLIDE 13: THANK YOU ==================== -->
+<!-- ==================== SLIDE 17: THANK YOU ==================== -->
 <section class="slide" id="s11" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); text-align: center;">
   <h1 style="font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; margin-bottom: 30px;" class="fade-in">
     <span style="background: linear-gradient(90deg, var(--accent), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">תודה</span>
   </h1>
   <div class="divider"></div>
-  <p style="font-size: 1.3rem; color: var(--muted); margin-top: 20px; max-width: 500px;" class="fade-in">בואו נבנה סטוריז שחוסכים לנו זמן, כסף, ותסכול</p>
+  <p style="font-size: 1.3rem; color: var(--muted); margin-top: 20px; max-width: 500px;" class="fade-in">בואו נדבר יותר, נניח פחות, ונבנה נכון מההתחלה</p>
   <p style="font-size: 1rem; color: var(--accent); margin-top: 30px;" class="fade-in">חמי בן לביא - Head of Product Operations</p>
   <p style="font-size: 0.9rem; color: var(--muted); margin-top: 5px;" class="fade-in">200Apps</p>
-  <span class="slide-number">13 / 13</span>
+  <span class="slide-number">17 / 16</span>
   <span class="watermark">200APPS</span>
 </section>
 

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מחשבון ROI - כמה אתם חוסכים? | 200Apps</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --card: #13131d;
+    --accent: #00d4aa;
+    --danger: #ff4757;
+    --warning: #ffa502;
+    --text: #e8e8e8;
+    --muted: #7a7a8e;
+    --gold: #f5c842;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,212,170,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .calc-container {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 50px;
+    max-width: 900px;
+    width: 100%;
+    border: 1px solid rgba(0,212,170,0.2);
+    position: relative;
+  }
+
+  .interactive-calc {
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .slider-group {
+    margin-bottom: 25px;
+  }
+
+  .slider-group label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  .slider-group label span:last-child {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.2rem;
+    min-width: 60px;
+    text-align: left;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    outline: none;
+    transition: background 0.2s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,212,170,0.4);
+    transition: transform 0.2s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .result-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 35px;
+  }
+
+  .result-box {
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .result-box:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .result-box .rb-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .result-box .rb-value {
+    font-size: 2rem;
+    font-weight: 900;
+    transition: all 0.3s ease;
+  }
+
+  .result-box.saved .rb-value { color: var(--accent); }
+  .result-box.wasted .rb-value { color: var(--danger); }
+  .result-box.roi .rb-value { color: var(--gold); }
+
+  .branding {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+
+  .branding strong {
+    color: var(--accent);
+  }
+
+  /* Value change animation */
+  .value-changed {
+    animation: pulse 0.4s ease;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  @media (max-width: 768px) {
+    .result-boxes { grid-template-columns: 1fr; }
+    .calc-container { padding: 30px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .slider-group label { font-size: 0.9rem; }
+    .result-box .rb-value { font-size: 1.4rem; }
+    .calc-container { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<h2>מחשבון: כמה אתם חוסכים?</h2>
+<p class="subtitle">הזיזו את הסליידרים לפי המציאות שלכם</p>
+
+<div class="calc-container">
+  <div class="interactive-calc">
+    <div class="slider-group">
+      <label>
+        <span>מספר מפתחים בצוות</span>
+        <span id="devCountLabel">5</span>
+      </label>
+      <input type="range" id="devCount" min="2" max="15" value="5" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <label>
+        <span>סטוריז בספרינט</span>
+        <span id="storyCountLabel">4</span>
+      </label>
+      <input type="range" id="storyCount" min="2" max="15" value="4" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <label>
+        <span>עלות יום מפתח ($)</span>
+        <span id="dayCostLabel">$500</span>
+      </label>
+      <input type="range" id="dayCost" min="200" max="800" step="50" value="500" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <label>
+        <span>רמת איכות סטורי נוכחית (%)</span>
+        <span id="qualityLabel">50%</span>
+      </label>
+      <input type="range" id="qualityLevel" min="25" max="100" step="25" value="50" oninput="updateCalc()">
+    </div>
+  </div>
+
+  <div class="result-boxes">
+    <div class="result-box wasted">
+      <div class="rb-label">עלות Rework שנתית</div>
+      <div class="rb-value" id="reworkCost">$0</div>
+    </div>
+    <div class="result-box saved">
+      <div class="rb-label">חיסכון שנתי אם 100%</div>
+      <div class="rb-value" id="savingsAmount">$0</div>
+    </div>
+    <div class="result-box roi">
+      <div class="rb-label">ROI על השקעה בדרישות</div>
+      <div class="rb-value" id="roiAmount">x0</div>
+    </div>
+  </div>
+</div>
+
+<div class="branding">
+  <strong>200Apps</strong> - Head of Product Operations
+</div>
+
+<script>
+function updateCalc() {
+  const devs = parseInt(document.getElementById('devCount').value);
+  const stories = parseInt(document.getElementById('storyCount').value);
+  const dayCost = parseInt(document.getElementById('dayCost').value);
+  const quality = parseInt(document.getElementById('qualityLevel').value);
+
+  document.getElementById('devCountLabel').textContent = devs;
+  document.getElementById('storyCountLabel').textContent = stories;
+  document.getElementById('dayCostLabel').textContent = '$' + dayCost;
+  document.getElementById('qualityLabel').textContent = quality + '%';
+
+  const devCostPerStory = dayCost * 3;
+  const baseCostPerStory = devCostPerStory * 1.4;
+  const sprints = 26;
+  const teamScale = devs / 5;
+
+  const reworkMap = { 25: 0.50, 50: 0.40, 75: 0.20, 100: 0.05 };
+  const reworkPct = reworkMap[quality] || 0.40;
+  const perfectRework = 0.05;
+
+  const currentReworkCost = baseCostPerStory * reworkPct * stories * sprints * teamScale;
+  const perfectReworkCost = baseCostPerStory * perfectRework * stories * sprints * teamScale;
+  const savings = currentReworkCost - perfectReworkCost;
+
+  const bugMultiplier = { 25: 0.15, 50: 0.08, 75: 0.03, 100: 0.005 };
+  const bugCost = baseCostPerStory * 10 * (bugMultiplier[quality] || 0.08) * stories * sprints * teamScale;
+  const perfectBugCost = baseCostPerStory * 10 * 0.005 * stories * sprints * teamScale;
+  const bugSavings = bugCost - perfectBugCost;
+
+  const totalRework = currentReworkCost + bugCost;
+  const totalSavings = savings + bugSavings;
+
+  // Animate value changes
+  ['reworkCost', 'savingsAmount', 'roiAmount'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('value-changed');
+    void el.offsetWidth;
+    el.classList.add('value-changed');
+  });
+
+  document.getElementById('reworkCost').textContent = '$' + Math.round(totalRework).toLocaleString();
+  document.getElementById('savingsAmount').textContent = '$' + Math.round(totalSavings).toLocaleString();
+
+  const roi = totalSavings > 0 ? (totalSavings / (baseCostPerStory * 0.1 * stories * sprints * teamScale)).toFixed(1) : 0;
+  document.getElementById('roiAmount').textContent = 'x' + roi;
+}
+
+// Initialize
+updateCalc();
+</script>
+</body>
+</html>
